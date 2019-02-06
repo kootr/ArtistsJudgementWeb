@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+<div class="form">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p style="margin-left:10px;">
+          絵画好きのAIが画像から画家を判定します。
+        </p>
+      <!--  {% if result %} -->
+            <h2 style="margin-left:10px;">AI「これは{{result[0]}}の絵です。」</h2>
+              <div class="col-md-7">
+                <img src= "./{{result[1]}}" class="detect_img">
+              </div>
+        <!--{% endif %} -->
+            <h3>画像をアップロードしてください</h3>
+          </div>
+        <div class="col-md-12" style="margin-top:10px; margin-bottom:20px;">
+          <form action="/post" method="post" class="form-inline" enctype = "multipart/form-data">
+            <input type = "file" name = "file" />
+            <button type="submit" class="btn btn-primary" style="margin-top:5px;">判定開始</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
