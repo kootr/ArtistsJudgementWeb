@@ -61,21 +61,19 @@ class TrainModel :
       date_str = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
       history = model.fit(self.x_train, self.y_train, batch_size=32, nb_epoch=30)
       hdf5_file = "./model/artist-model.hdf5"
-     # model.save_weights("./model/artist-model-" + date_str + ".hdf5")
       model.save_weights(hdf5_file)
 
       # モデルのテスト
       score = model.evaluate(self.x_test, self.y_test, verbose=0)
       print('loss=', score[0])
       print('accuracy=', score[1])
-      
+
       #学習過程プロット
       plt.plot(history.history["acc"], label="acc", ls="-", marker="o")
       plt.ylabel("accuracy")
       plt.xlabel("epoch")
       plt.legend(loc="best")
       plt.show()
-
 
     return model
 
