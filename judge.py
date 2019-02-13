@@ -27,4 +27,4 @@ def evaluation(target_image_path, hdf5_path):
         return (artistname[y], target_image_path)
 
 if __name__ == '__main__':
-  evaluation('./testdata/img_30.jpg', './model/artist-model.hdf5')
+  evaluation('./testdata/img_1.jpg', './model/artist-model.hdf5')
