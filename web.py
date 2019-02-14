@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-import tensorflow as tf
 import multiprocessing as mp
 from flask import Flask, render_template, request, redirect, url_for
 import numpy as np
@@ -14,7 +11,7 @@ app.config['DEBUG'] = True
 # 投稿画像の保存先
 UPLOAD_FOLDER = './static/uploadimages'
 
-# ルーティング。/にアクセス時
+# ルーティング "/" にアクセス時
 @app.route('/')
 def index():
   return render_template('index.html')

@@ -3,7 +3,6 @@ import sys, os
 from PIL import Image
 import numpy as np
 import pandas as pd
-#import tensorflow as tf
 
 def evaluation(target_image_path, hdf5_path):
         image_size = 50
