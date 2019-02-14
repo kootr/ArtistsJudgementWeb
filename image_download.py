@@ -11,7 +11,7 @@ import json
 # (1) ソースコードを保存して命名する (e.g. scrape.py)
 # (2) プログラムを起動する python scrape.py
 # (3) オプション
-# -s: Google Imagesにかける検索キーワード、複数可 (デフォルト "banana")
+# -s: Google Imagesにかける検索キーワード、複数可 (デフォルト "tokyo")
 # -n: ダウンロードする画像の数量 (デフォルト 10枚)
 # -o: 画像の保存先 (デフォルト　<DEFAULT_SAVE_DIRECTORY>で指定する)
 
@@ -20,7 +20,7 @@ def get_soup(url,header):
 
 def main(args):
     parser = argparse.ArgumentParser(description='Options for scraping Google images')
-    parser.add_argument('-s', '--search', default='banana', type=str, help='search term')
+    parser.add_argument('-s', '--search', default='tokyo', type=str, help='search term')
     parser.add_argument('-n', '--num_images', default=10, type=int, help='num of images to scrape')
     parser.add_argument('-o', '--directory', default='<DEFAULT_SAVE_DIRECTORY>', type=str, help='output directory')
     args = parser.parse_args()
