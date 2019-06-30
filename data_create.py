@@ -4,7 +4,6 @@ import os, glob
 import numpy as np
 import random, math
 
-# トレーニングデータ生成
 class DataCreate :
   def __init__(self, script_name):
     Image.LOAD_TRUNCATED_IMAGES = True
@@ -17,9 +16,9 @@ class DataCreate :
     for index, dir_name in enumerate(dir_list):
       if dir_name == '.DS_Store' :
         continue
-
       #画家ごとのフォルダ名を配列に渡す
       artistname.append(dir_name)
+
     # 画像データとラベルデータ
     image_size = 50
     train_data = []
@@ -27,9 +26,6 @@ class DataCreate :
     for idx, name in enumerate(artistname):
       try :
         print("---", name)
-    #    image_dir = input_dir + "/" + artistname
-    #    ext_list = ["jpg", "jpeg","png"]
-    #    files = (glob.glob(image_dir + "/*." + ext) for ext in ext_list)
         image_dir = input_dir + "/" + name
         files = glob.glob(image_dir + "/*.jpg")
         for i, f in enumerate(files):
@@ -55,7 +51,6 @@ class DataCreate :
           np.array(Y[0:test_idx]), np.array(Y[test_idx:]))
     #結果を保存
     np.save("./npy/artists", xy)
-
 
 if __name__ == "__main__":
   args = sys.argv
