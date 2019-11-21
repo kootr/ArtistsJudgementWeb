@@ -4,6 +4,7 @@ import os, glob
 import numpy as np
 import random, math
 
+#iwasawa_test_20191121
 class DataCreate :
   def __init__(self, script_name):
     Image.LOAD_TRUNCATED_IMAGES = True
