@@ -1,12 +1,11 @@
 import sys
 import os
+import datetime
 import numpy as np
 import gc
 from keras.models import Sequential
 from keras.utils import np_utils
-from keras.layers import Dense, Dropout, Activation, Flatten
-from keras.layers import Conv2D, MaxPooling2D
-import datetime
+from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 import matplotlib.pyplot as plt
 
 
@@ -29,9 +28,8 @@ class TrainModel:
         model = Sequential()
     # K=32, M=3, H=3
         if input is None:
-            model.add(
-                Conv2D(32, (3, 3), padding='same',
-                       input_shape=self.x_train.shape[1:]))
+            model.add(Conv2D(32, (3, 3), padding='same',
+                            input_shape=self.x_train.shape[1:])
         else:
             model.add(Conv2D(32, (3, 3),
                       border_mode='same', input_shape=input))
@@ -76,7 +74,7 @@ class TrainModel:
             plt.legend(loc="best")
             plt.show()
 
-      return model
+        return model
 
 
 if __name__ == "__main__":
