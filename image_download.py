@@ -8,11 +8,16 @@ import sys
 import json
 
 # -s: Google Imagesにかける検索キーワード、複数可 (デフォルト "tokyo")
-# -n: ダウンロードする画像の数量
+# -n: ダウンロードする画像の数
 # -o: 画像の保存先
 
+
 def get_soup(url, header):
-    return bs4.BeautifulSoup(urllib.request.urlopen(urllib.request.Request(url, headers=header)), "html.parser")
+    return bs4.BeautifulSoup(
+        urllib.request.urlopen(urllib.request.Request(url, headers=header)),
+        "html.parser",
+    )
+
 
 def main(search, num_images, directory):
     query = search.split()
@@ -49,8 +54,12 @@ def main(search, num_images, directory):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Options for scraping Google images")
     parser.add_argument("-s", "--search", default="tokyo", type=str, help="search term")
-    parser.add_argument("-n", "--num_images", default=10, type=int, help="num of images to scrap")
-    parser.add_argument("-o", "--directory", default="./", type=str, help="output directory")
+    parser.add_argument(
+        "-n", "--num_images", default=10, type=int, help="num of images to scrap"
+    )
+    parser.add_argument(
+        "-o", "--directory", default="./", type=str, help="output directory"
+    )
     args = parser.parse_args()
     try:
         main(search=args.search, num_images=args.num_images, directory=args.directory)
