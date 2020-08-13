@@ -1,5 +1,5 @@
 [flake8]
-max-line-length = 120
+max-line-length = 135
 docstring-convention = google
-ignore = W504,E203
+ignore = W504,E203,E722
 exclude = **test**
