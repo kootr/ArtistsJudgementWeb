@@ -2,3 +2,6 @@ testdata/
 data/
 images/
 __pycache__
+*.ipynb*
+model
+result_model/
