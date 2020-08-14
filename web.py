@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 import os
 import judge
 
@@ -7,7 +7,7 @@ import judge
 app = Flask(__name__)
 app.config["DEBUG"] = True
 # 投稿画像の保存先
-UPLOAD_FOLDER = "./static/uploadimages"
+UPLOAD_FOLDER = "./images/upload_images"
 
 
 # ルーティング "/" にアクセス時
