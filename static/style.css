@@ -1,20 +1,11 @@
-.red {
-  color: red;
-}
-
 .detect_img {
   width: 80%;
   height: 80%;
   border: 1px solid #808080;
 }
 
-
-.logo_container {
-  margin-top:50px;
-}
-
 .detail_container {
-  background-color:#dcdcdc;
-  padding:5px; width:200px;
-  border:1px solid #a9a9a9;
+  background-color:#f7f6dcc0;
+  padding:5px;
+  border:50px solid #a9a9a9;
 }
