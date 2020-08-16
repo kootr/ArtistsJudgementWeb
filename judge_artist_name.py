@@ -24,14 +24,13 @@ def main(target_image_path, hdf5_path):
     X.append(input_data)
     X = np.array(X)
     model = build_model(num_artist, hdf5_path)
-    result = model.predict([X])[0]
+    result_score = model.predict([X])[0]
 
-    predict = model.predict(X)
-    for name, score in zip(artistname, result):
-        print(f"{name}: {score*100}")
-    # predictの中で一番大きい値のラベルを返す
-    y = predict.argmax()
-    return (artistname[y], target_image_path)
+    h_indexes = result_score.argsort()[::-1]
+    # for h_index in h_indexes:
+    #     print(f"{artistname[h_index]}: {result_score[h_index]*100}")
+
+    return h_indexes, artistname, result_score, target_image_path
 
 
 def build_model(num_artist, hdf5_path):
