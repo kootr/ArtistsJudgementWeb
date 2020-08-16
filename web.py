@@ -1,13 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import os
-import judge
+import judge_artist_name
 
-# 自身の名称を app という名前でインスタンス化する
+UPLOAD_FOLDER = "./images/upload_images"
 app = Flask(__name__)
 app.config["DEBUG"] = True
-# 投稿画像の保存先
-UPLOAD_FOLDER = "./images/upload_images"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = set(["png", "jpg", "gif"])
 
 
 # ルーティング "/" にアクセス時
@@ -16,25 +16,47 @@ def index():
     return render_template("index.html")
 
 
+def allowed_file(file_name):
+    return "." in file_name and file_name.rsplit(".", 1)[1] in ALLOWED_EXTENSIONS
+
+
 # 画像投稿時のアクション
 @app.route("/post", methods=["GET", "POST"])
-def post():
+def upload_file():
     if request.method == "POST":
-        if not request.files["file"].filename == u"":
-            # アップロードされたファイルを保存
-            f = request.files["file"]
-            img_path = os.path.join(UPLOAD_FOLDER, secure_filename(f.filename))
-            f.save(img_path)
+        if "file" not in request.files:
+            flash("File not found")
+            return redirect(request.url)
+        file = request.files["file"]
+
+        if file.filename == "":
+            flash("File not found")
+            return redirect(request.url)
+
+        if file and allowed_file(file.filename):
+            file_name = secure_filename(file.filename)
+            file_path = os.path.join(app.config["UPLOAD_FOLDER"], file_name)
+            file.save(file_path)
+
             # judge.pyへアップロードされた画像を渡す
-            result = judge.evaluation(img_path, "./model/artist-model.hdf5")
-        else:
-            result = []
-        return render_template("index.html", result=result)
+            (
+                h_indexes,
+                artistname,
+                result_score,
+                target_image_path,
+            ) = judge_artist_name.main(file_path, "./model/artist-model_master.hdf5")
+
+        return render_template(
+            "index.html",
+            h_indexes=h_indexes,
+            artistname=artistname,
+            result_score=result_score,
+            target_image_path=file_path,
+        )
     else:
         # エラーなどでリダイレクトしたい場合
         return redirect(url_for("index"))
 
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run(host="0.0.0.0")
+    app.run()
