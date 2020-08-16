@@ -30,7 +30,7 @@ def main(target_image_path, hdf5_path):
     # for h_index in h_indexes:
     #     print(f"{artistname[h_index]}: {result_score[h_index]*100}")
 
-    return h_indexes, artistname, result_score, target_image_path
+    return h_indexes, artistname, result_score
 
 
 def build_model(num_artist, hdf5_path):
