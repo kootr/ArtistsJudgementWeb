@@ -1,11 +1,11 @@
 .detect_img {
-  width: 80%;
-  height: 80%;
+  width: 50%;
+  height: 50%;
   border: 1px solid #808080;
 }
 
 .detail_container {
   background-color:#f7f6dcc0;
   padding:5px;
-  border:50px solid #a9a9a9;
+  border:2px solid #a9a9a9;
 }
