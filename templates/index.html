@@ -7,13 +7,15 @@
     <div class="row">
       <div class="col-md-12">
         <p style="margin-left:15px;">
-          絵画好きのAIが画像から画家を判定します。
+        絵画好きのAIが画像から画家を判定します。
         </p>
         {% if file_path %}
         <h2 style="margin-left:10px;">AI「これは{{result_score[h_indexes[0]]*100}}%の確率で{{artistname[h_indexes[0]]}}の絵です。」
         </h2>
-        <div class="col-md-7">
+        <div class="col-md-5">
+          <p>
           <img src="{{file_path}}" class="detect_img">
+          </p>
         </div>
         <div class="col-md-5">
           <p class="detail_container">
@@ -32,14 +34,12 @@
         </form>
       </div>
       <div class="col-md-12">
-        <p style="font-size:7px;">
-            AIが知っている画家一覧<br>
-            ・Claude_Monet<br>
-            ・Salvador_Dali<br>
-            ・Gustav_Klimt<br>
-            ・Henri_Matisse<br>
-            ・Caravaggio<br>
-        </p>
+        <div style="font-size:7px" align="left">
+          AIが知っている画家一覧<br>
+          ・Claude_Monet ・Henri_Matisse<br>
+          ・Salvador_Dali ・Gustav_Klimt<br>
+          ・Caravaggio<br>
+        </div>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import judge_artist_name
 
-UPLOAD_FOLDER = "./images/upload_images"
+UPLOAD_FOLDER = "./static/upload_images"
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
