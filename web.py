@@ -7,7 +7,7 @@ UPLOAD_FOLDER = "./static/upload_images"
 app = Flask(__name__)
 app.config["DEBUG"] = True
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-ALLOWED_EXTENSIONS = set(["png", "jpg", "gif"])
+ALLOWED_EXTENSIONS = set(["png", "jpg", "gif", "PNG", "JPG", "GIF"])
 
 
 # ルーティング "/" にアクセス時
@@ -38,7 +38,7 @@ def upload_file():
             file_path = os.path.join(app.config["UPLOAD_FOLDER"], file_name)
             file.save(file_path)
             (h_indexes, artistname, result_score) = judge_artist_name.main(
-                file_path, "./model/artist-model_master.hdf5"
+                file_path, "./model/artist-model_15_aug.hdf5"
             )
         else:
             return redirect(url_for("index"))

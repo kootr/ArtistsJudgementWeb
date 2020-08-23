@@ -5,17 +5,14 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
+from keras.optimizers import RMSprop
 
 
 def main(target_image_path, hdf5_path):
     X = []
-    image_size = 50
+    image_size = 200
     image_dir = "./images"
-    artistname = [
-        name
-        for name in os.listdir(image_dir)
-        if (name != "upload_images") and (name != ".DS_Store")
-    ]
+    artistname = [name for name in os.listdir(image_dir) if name != ".DS_Store"]
     num_artist = len(artistname)
     img = Image.open(target_image_path)
     img = img.convert("RGB")
@@ -23,7 +20,7 @@ def main(target_image_path, hdf5_path):
     input_data = np.asarray(img)
     X.append(input_data)
     X = np.array(X)
-    model = build_model(num_artist, hdf5_path)
+    model = build_model(num_artist, image_size, hdf5_path)
     result_score = model.predict([X])[0]
 
     h_indexes = result_score.argsort()[::-1]
@@ -33,10 +30,12 @@ def main(target_image_path, hdf5_path):
     return h_indexes, artistname, result_score
 
 
-def build_model(num_artist, hdf5_path):
+def build_model(num_artist, image_size, hdf5_path):
     model = Sequential()
     # Keras official https://github.com/keras-team/keras/blob/master/examples/cifar10_cnn.py
-    model.add(Conv2D(32, (3, 3), padding="same", input_shape=(50, 50, 3)))
+    model.add(
+        Conv2D(32, (3, 3), padding="same", input_shape=(image_size, image_size, 3))
+    )
     model.add(Activation("relu"))
     model.add(Conv2D(32, (3, 3)))
     model.add(Activation("relu"))
@@ -54,9 +53,9 @@ def build_model(num_artist, hdf5_path):
     model.add(Dropout(0.5))
     model.add(Dense(num_artist))
     model.add(Activation("softmax"))
-    model.compile(
-        loss="categorical_crossentropy", optimizer="rmsprop", metrics=["accuracy"]
-    )
+
+    opt = RMSprop(lr=0.0001, decay=1e-6)
+    model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])
 
     model.load_weights(hdf5_path)
 
@@ -64,4 +63,4 @@ def build_model(num_artist, hdf5_path):
 
 
 if __name__ == "__main__":
-    main("./images/Claude_Monet/Claude_Monet_2.jpg", "./model/artist-model_master.hdf5")
+    main("./images/Claude_Monet/Claude_Monet_2.jpg", "artist-model_15_aug")
