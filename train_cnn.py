@@ -19,7 +19,9 @@ def main():
 
     model = train(X_train, X_test, y_train, y_test, num_artist)
     date_str = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-    history = model.fit(X_train, y_train, batch_size=32, epochs=5, validation_split=0.2)
+    history = model.fit(
+        X_train, y_train, batch_size=32, epochs=50, validation_split=0.1
+    )
     hdf5_file = f"./model/artist-model_{num_artist}.hdf5"
     model.save_weights(hdf5_file)
     plot_model(history, date_str)
@@ -67,7 +69,7 @@ def plot_model(history, date_str):
     plt.xlabel("epoch")
     plt.grid()
     plt.legend(["acc", "val_acc"], loc="best")
-    plt_file = f"./learning_curve_acc_{date_str}.jpg"
+    plt_file = f"./result_model/learning_curve_acc_{date_str}.jpg"
     plt.savefig(plt_file)
     plt.close()
 
@@ -79,7 +81,7 @@ def plot_model(history, date_str):
     plt.xlabel("epoch")
     plt.grid()
     plt.legend(["loss", "val_loss"], loc="best")
-    plt_file = f"./learning_curve_loss_{date_str}.jpg"
+    plt_file = f"./result_model/learning_curve_loss_{date_str}.jpg"
     plt.savefig(plt_file)
     plt.close()
     return
