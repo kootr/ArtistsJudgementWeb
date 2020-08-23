@@ -19,8 +19,8 @@ def main():
         train_cnt = 0
         try:
             print("---", name)
-            image_dir = image_dir + "/" + name
-            files = glob.glob(image_dir + "/*.jpg")
+            artist_image_dir = image_dir + "/" + name
+            files = glob.glob(artist_image_dir + "/*.jpg")
             for file_idx, file in enumerate(files):
                 if train_cnt >= num_data:
                     break
