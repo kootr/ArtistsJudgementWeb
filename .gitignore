@@ -5,3 +5,4 @@ model
 result_model/
 .DS_Store
 upload_images/
+.npy
