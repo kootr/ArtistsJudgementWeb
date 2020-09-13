@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 
 def main():
     input_dir = "./images"
+    epochs = 3
     num_artist = len([name for name in os.listdir(input_dir) if name != ".DS_Store"])
     X_train, X_test, y_train, y_test = np.load("./npy/artists.npy", allow_pickle=True)
     X_train = X_train.astype("float") / 255
@@ -20,10 +21,13 @@ def main():
     model = train(X_train, X_test, y_train, y_test, num_artist)
     date_str = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     history = model.fit(
-        X_train, y_train, batch_size=32, epochs=50, validation_split=0.1
+        X_train, y_train, batch_size=32, epochs=epochs, validation_split=0.1
     )
-    hdf5_file = f"./model/artist-model_{num_artist}.hdf5"
+    hdf5_file = f"./model/artist-model_{num_artist}_{epochs}.hdf5"
     model.save_weights(hdf5_file)
+    json_string = model.to_json()
+    with open("./model/cnn_model.json", mode="w") as f:
+        f.write(json_string)
     plot_model(history, date_str)
 
     score = model.evaluate(X_test, y_test, verbose=0)
@@ -53,6 +57,7 @@ def train(X_train, X_test, y_train, y_test, num_artist):
     model.add(Dense(num_artist))
     model.add(Activation("softmax"))
 
+    model.summary()
     opt = RMSprop(lr=0.0001, decay=1e-6)
     model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])
 
