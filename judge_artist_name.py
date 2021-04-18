@@ -1,9 +1,9 @@
 import os
-from PIL import Image
-import numpy as np
 
+import numpy as np
 from keras.models import model_from_json
 from keras.optimizers import RMSprop
+from PIL import Image
 
 
 def main(target_image_path, hdf5_path):
@@ -39,5 +39,5 @@ def build_model(num_artist, image_size, hdf5_path):
     return model
 
 
-if __name__ == "__main__":
-    main("./images/Claude_Monet/Claude_Monet_2.jpg", "artist-model_15_")
+# if __name__ == "__main__":
+#     main("./images/Claude_Monet/Claude_Monet_2.jpg", "artist-model_15_")
