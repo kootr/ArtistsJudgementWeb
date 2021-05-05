@@ -1,9 +1,10 @@
-from PIL import Image
-import os
 import glob
-import numpy as np
 import math
+import os
 import random
+
+import numpy as np
+from PIL import Image
 
 image_size = 200
 num_data = 300
@@ -13,7 +14,7 @@ Image.LOAD_TRUNCATED_IMAGES = True
 def main():
     train_data = []
     artistname = []
-    image_dir = "images"
+    image_dir = "../images"
     artistname = [name for name in os.listdir(image_dir) if name != ".DS_Store"]
     for name_idx, name in enumerate(artistname):
         train_cnt = 0
@@ -59,7 +60,7 @@ def main():
         y_test = np.array(Y[test_idx:])
 
         xy = (X_train, X_test, y_train, y_test)
-        np.save("./npy/artists.npy", xy)
+        np.save("../npy/artists.npy", xy)
 
 
 if __name__ == "__main__":
