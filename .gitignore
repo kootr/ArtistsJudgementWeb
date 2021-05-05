@@ -1,8 +1,7 @@
-images/
+images/*
 __pycache__
-*.ipynb*
 model/*.hdf5
-result_model
-.DS_Store
+result_model/*
 upload_images/
-.npy
+npy/*
+.DS_Store
