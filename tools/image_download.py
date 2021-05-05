@@ -1,5 +1,5 @@
-import os
 import argparse
+import os
 import sys
 
 from google_images_download import google_images_download
@@ -9,7 +9,7 @@ from google_images_download import google_images_download
 
 
 def main(search, num_images):
-    save_directory = "./images/" + search
+    save_directory = "../images/" + search
     if not os.path.exists(save_directory):
         os.makedirs(save_directory)
 
@@ -19,7 +19,7 @@ def main(search, num_images):
                 "keywords": search,
                 "no_numbering": False,
                 "limit": 100,
-                "output_directory": "./images",
+                "output_directory": "../images",
                 "image_directory": search,
                 "chromedriver": "/usr/local/bin/chromedriver",
             }

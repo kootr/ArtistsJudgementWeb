@@ -37,7 +37,3 @@ def build_model(num_artist, image_size, hdf5_path):
     model.load_weights(hdf5_path)
 
     return model
-
-
-# if __name__ == "__main__":
-#     main("./images/Claude_Monet/Claude_Monet_2.jpg", "artist-model_15_")

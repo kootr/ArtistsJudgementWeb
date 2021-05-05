@@ -1,18 +1,19 @@
-import os
 import datetime
-import numpy as np
-from keras.models import Sequential
-from keras.utils import np_utils
-from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
-from keras.optimizers import RMSprop
+import os
+
 import matplotlib.pyplot as plt
+import numpy as np
+from keras.layers import Activation, Conv2D, Dense, Dropout, Flatten, MaxPooling2D
+from keras.models import Sequential
+from keras.optimizers import RMSprop
+from keras.utils import np_utils
 
 
 def main():
-    input_dir = "./images"
+    input_dir = "../images"
     epochs = 3
     num_artist = len([name for name in os.listdir(input_dir) if name != ".DS_Store"])
-    X_train, X_test, y_train, y_test = np.load("./npy/artists.npy", allow_pickle=True)
+    X_train, X_test, y_train, y_test = np.load("../npy/artists.npy", allow_pickle=True)
     X_train = X_train.astype("float") / 255
     X_test = X_test.astype("float") / 255
     y_train = np_utils.to_categorical(y_train, num_artist)
@@ -23,10 +24,10 @@ def main():
     history = model.fit(
         X_train, y_train, batch_size=32, epochs=epochs, validation_split=0.1
     )
-    hdf5_file = f"./model/artist-model_{num_artist}_{epochs}.hdf5"
+    hdf5_file = f"../model/artist-model_{num_artist}_{epochs}.hdf5"
     model.save_weights(hdf5_file)
     json_string = model.to_json()
-    with open("./model/cnn_model.json", mode="w") as f:
+    with open("../model/cnn_model.json", mode="w") as f:
         f.write(json_string)
     plot_model(history, date_str)
 
@@ -86,7 +87,7 @@ def plot_model(history, date_str):
     plt.xlabel("epoch")
     plt.grid()
     plt.legend(["loss", "val_loss"], loc="best")
-    plt_file = f"./result_model/learning_curve_loss_{date_str}.jpg"
+    plt_file = f"../result_model/learning_curve_loss_{date_str}.jpg"
     plt.savefig(plt_file)
     plt.close()
     return
