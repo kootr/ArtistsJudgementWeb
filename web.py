@@ -37,8 +37,12 @@ def upload_file():
             file_name = secure_filename(file.filename)
             file_path = os.path.join(app.config["UPLOAD_FOLDER"], file_name)
             file.save(file_path)
-            (h_indexes, artistname, result_score) = judge_artist_name.main(
-                file_path, hdf5_path="./model/artist-model_15.hdf5"
+            (
+                h_indexes,
+                artistname,
+                result_score_rounded_percent,
+            ) = judge_artist_name.main(
+                file_path, hdf5_path="./model/artist-model_4_3.hdf5"
             )
         else:
             return redirect(url_for("index"))
@@ -47,7 +51,7 @@ def upload_file():
             "index.html",
             h_indexes=h_indexes,
             artistname=artistname,
-            result_score=result_score,
+            result_score=result_score_rounded_percent,
             file_path=file_path,
         )
     else:

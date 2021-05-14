@@ -10,7 +10,7 @@
         </p>
         {% if file_path %}
         <h2 style="margin-left: 10px">
-          AI「これは{{result_score[h_indexes[0]]*100}}%の確率で{{artistname[h_indexes[0]]}}の絵です。」
+          AI「これは{{result_score[h_indexes[0]]}}%の確率で{{artistname[h_indexes[0]]}}の絵です。」
         </h2>
         <div class="col-md-5">
           <p>
@@ -19,9 +19,9 @@
         </div>
         <div class="col-md-5">
           <p class="detail_container">
-            {{artistname[h_indexes[0]]}}の確率が{{result_score[h_indexes[0]]*100}}%<br />
-            {{artistname[h_indexes[1]]}}の確率が{{result_score[h_indexes[1]]*100}}%<br />
-            {{artistname[h_indexes[2]]}}の確率が{{result_score[h_indexes[2]]*100}}%<br />
+            {{artistname[h_indexes[0]]}}の確率が{{result_score[h_indexes[0]]}}%<br />
+            {{artistname[h_indexes[1]]}}の確率が{{result_score[h_indexes[1]]}}%<br />
+            {{artistname[h_indexes[2]]}}の確率が{{result_score[h_indexes[2]]}}%<br />
           </p>
         </div>
         {% endif %}
@@ -40,7 +40,7 @@
       </div>
       <div class="col-md-12">
         <div style="font-size: 15px" align="left">
-          AIが知っている画家一覧<br />
+          <!-- AIが知っている画家一覧<br /> -->
           <!-- ・Claude_Monet ・Henri_Matisse<br>
           ・Salvador_Dali ・Gustav_Klimt<br>
           ・Caravaggio<br> -->

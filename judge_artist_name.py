@@ -10,7 +10,11 @@ def main(target_image_path, hdf5_path):
     X = []
     image_size = 200
     image_dir = "./images"
-    artistname = [name for name in os.listdir(image_dir) if name != ".DS_Store"]
+    artistname = [
+        name
+        for name in os.listdir(image_dir)
+        if name != ".DS_Store" and name != ".gitkeep"
+    ]
     num_artist = len(artistname)
     img = Image.open(target_image_path)
     img = img.convert("RGB")
@@ -19,11 +23,12 @@ def main(target_image_path, hdf5_path):
     X.append(input_data)
     X = np.array(X)
     model = build_model(num_artist, image_size, hdf5_path)
-    result_score = model.predict([X])[0]
+    result_score = model.predict([X])[0]  # result_score is numpy.array
 
     h_indexes = result_score.argsort()[::-1]
+    result_score_rounded_percent = np.round(result_score, decimals=4) * 100
 
-    return h_indexes, artistname, result_score
+    return h_indexes, artistname, result_score_rounded_percent
 
 
 def build_model(num_artist, image_size, hdf5_path):

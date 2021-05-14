@@ -12,7 +12,13 @@ from keras.utils import np_utils
 def main():
     input_dir = "../images"
     epochs = 3
-    num_artist = len([name for name in os.listdir(input_dir) if name != ".DS_Store"])
+    num_artist = len(
+        [
+            name
+            for name in os.listdir(input_dir)
+            if name != ".DS_Store" and name != ".gitkeep"
+        ]
+    )
     X_train, X_test, y_train, y_test = np.load("../npy/artists.npy", allow_pickle=True)
     X_train = X_train.astype("float") / 255
     X_test = X_test.astype("float") / 255
@@ -34,6 +40,13 @@ def main():
     score = model.evaluate(X_test, y_test, verbose=0)
     print("Test loss=", score[0])
     print("Test accuracy=", score[1])
+    print(
+        [
+            name
+            for name in os.listdir(input_dir)
+            if name != ".DS_Store" and name != ".gitkeep"
+        ]
+    )
 
 
 def train(X_train, X_test, y_train, y_test, num_artist):
@@ -75,7 +88,7 @@ def plot_model(history, date_str):
     plt.xlabel("epoch")
     plt.grid()
     plt.legend(["acc", "val_acc"], loc="best")
-    plt_file = f"./result_model/learning_curve_acc_{date_str}.jpg"
+    plt_file = f"../result_model/learning_curve_acc_{date_str}.jpg"
     plt.savefig(plt_file)
     plt.close()
 

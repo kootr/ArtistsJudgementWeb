@@ -15,7 +15,11 @@ def main():
     train_data = []
     artistname = []
     image_dir = "../images"
-    artistname = [name for name in os.listdir(image_dir) if name != ".DS_Store"]
+    artistname = [
+        name
+        for name in os.listdir(image_dir)
+        if name != ".DS_Store" and name != ".gitkeep"
+    ]
     for name_idx, name in enumerate(artistname):
         train_cnt = 0
         try:
