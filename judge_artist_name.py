@@ -1,7 +1,7 @@
 import os
 
 import numpy as np
-from keras.models import model_from_json
+from keras.models import load_model, model_from_json
 from keras.optimizers import RMSprop
 from PIL import Image
 
@@ -39,6 +39,7 @@ def build_model(num_artist, image_size, hdf5_path):
 
     model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])
 
-    model.load_weights(hdf5_path)
+    # model.load_weights(hdf5_path)
+    model = load_model(hdf5_path)
 
     return model

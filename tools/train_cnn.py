@@ -31,7 +31,10 @@ def main():
         X_train, y_train, batch_size=32, epochs=epochs, validation_split=0.1
     )
     hdf5_file = f"../model/artist-model_{num_artist}_{epochs}.hdf5"
-    model.save_weights(hdf5_file)
+    # model.save_weights(hdf5_file) this output used with model.load_weights in judge_artist_name.py
+    model.save(
+        hdf5_file
+    )  # this output used with model.load_model in judge_artist_name.py
     json_string = model.to_json()
     with open("../model/cnn_model.json", mode="w") as f:
         f.write(json_string)
