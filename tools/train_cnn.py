@@ -11,7 +11,7 @@ from keras.utils import np_utils
 
 def main():
     input_dir = "../images"
-    epochs = 3
+    epochs = 30
     num_artist = len(
         [
             name

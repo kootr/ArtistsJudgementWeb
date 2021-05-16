@@ -38,14 +38,16 @@
           <button class="btn btn-primary" type="submit">判定開始</button>
         </form>
       </div>
+      {% if file_path %}
       <div class="col-md-12">
         <div style="font-size: 15px" align="left">
-          <!-- AIが知っている画家一覧<br /> -->
-          <!-- ・Claude_Monet ・Henri_Matisse<br>
-          ・Salvador_Dali ・Gustav_Klimt<br>
-          ・Caravaggio<br> -->
+          AIが知っている画家一覧<br />
+          ・{{artistname[0]}}<br />
+          ・{{artistname[1]}}<br />
+          ・{{artistname[2]}}<br />
         </div>
       </div>
+      {% endif %}
     </div>
   </div>
 </div>

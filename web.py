@@ -42,7 +42,7 @@ def upload_file():
                 artistname,
                 result_score_rounded_percent,
             ) = judge_artist_name.main(
-                file_path, hdf5_path="./model/artist-model_4_3.hdf5"
+                file_path, hdf5_path="./model/artist-model_3_1.hdf5"
             )
         else:
             return redirect(url_for("index"))
