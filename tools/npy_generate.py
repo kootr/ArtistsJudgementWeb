@@ -7,15 +7,19 @@ import numpy as np
 from PIL import Image
 
 image_size = 200
-num_data = 300
+num_data = 900
 Image.LOAD_TRUNCATED_IMAGES = True
 
 
-def main():
+def main(rotate=True):
     train_data = []
     artistname = []
     image_dir = "../images"
-    artistname = [name for name in os.listdir(image_dir) if name != ".DS_Store"]
+    artistname = [
+        name
+        for name in os.listdir(image_dir)
+        if name != ".DS_Store" and name != ".gitkeep"
+    ]
     for name_idx, name in enumerate(artistname):
         train_cnt = 0
         try:
@@ -28,21 +32,27 @@ def main():
                 img = Image.open(file)
                 img = img.convert("RGB")
                 img = img.resize((image_size, image_size))
-
-                # added for no augumentation
-                # rotation
-                for angle in range(-90, 1, 90):
-                    img_r = img.rotate(angle)
-                    img_np = np.asarray(img_r)
+                if rotate is False:
+                    img_np = np.asarray(img)
                     train_data.append([img_np, name_idx])
                     train_cnt += 1
-                    # inverse
-                    # img_trans = img_r.transpose(Image.FLIP_LEFT_RIGHT)
-                    # img_np = np.asarray(img_trans)
-                    # train_data.append([img_np, name_idx])
-                    # train_cnt += 1
                     if train_cnt >= num_data:
                         break
+                # added for no augumentation
+                # rotation
+                if rotate is True:
+                    for angle in range(-90, 91, 90):
+                        img_r = img.rotate(angle)
+                        img_np = np.asarray(img_r)
+                        train_data.append([img_np, name_idx])
+                        train_cnt += 1
+                        # inverse
+                        # img_trans = img_r.transpose(Image.FLIP_LEFT_RIGHT)
+                        # img_np = np.asarray(img_trans)
+                        # train_data.append([img_np, name_idx])
+                        # train_cnt += 1
+                        if train_cnt >= num_data:
+                            break
         except:
             print("SKIP : " + name)
 
